@@ -80,7 +80,7 @@ void loop()
   {
     float distanceCm = getDistanceCm(TRIG_PINS[0], ECHO_PINS[0]);
 
-    if (distanceCm <= 25.0)
+    if (distanceCm <= DISTANCE_THRESHOLD_CM)
     {
       firstActivated = true;
       globalTimeTracking = millis();
