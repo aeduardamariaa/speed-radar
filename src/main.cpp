@@ -40,7 +40,7 @@ float getDistanceCm(uint8_t trigPin, uint8_t echoPin)
 }
 
 double getAverageSpeedKmHour(int timePassedMillis) {
-  double avgSpeedMetersSecond = DISTANCE_BETWEEN_M / timePassedMillis / 1000;
+  double avgSpeedMetersSecond = DISTANCE_BETWEEN_M / (timePassedMillis / 1000.0);
 
   return (avgSpeedMetersSecond * MT_S_TO_KM_H);
 }
@@ -85,8 +85,6 @@ void loop()
       firstActivated = true;
       globalTimeTracking = millis();
     }
-
-    return;
   }
   else
   {
@@ -97,6 +95,9 @@ void loop()
 
     lcd.setCursor(0, 0);
     lcd.printf("%.4f", avgSpeed);
+
+    firstActivated = false;
+    secondActivated = false;
 
     delay(5);
   }
