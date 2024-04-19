@@ -2,18 +2,18 @@
 #include <LiquidCrystal_I2C.h>
 
 // hardware constants
-#define SERIAL_SPEED 115200
+const int SERIAL_SPEED = 115200;
 const uint8_t TRIG_PINS[2] = {5, 26};
 const uint8_t ECHO_PINS[2] = {18, 25};
 
 // physical constants
-#define SOUND_SPEED 0.034
-#define CM_TO_INCH 0.393701
-#define MT_S_TO_KM_H 3.6
+const float SOUND_SPEED = 0.034;
+const float CM_TO_INCH = 0.393701;
+const float MT_S_TO_KM_H = 3.6;
 
 // project constants
-#define DISTANCE_THRESHOLD_CM 25.0
-#define DISTANCE_BETWEEN_M 0.3
+const float DISTANCE_THRESHOLD_CM = 25.0;
+const float DISTANCE_BETWEEN_M = 0.3;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -59,19 +59,15 @@ bool isPastOver()
 void setup()
 {
   Serial.begin(SERIAL_SPEED);
-  lcd.begin();
 
+  lcd.begin();
   lcd.backlight();
 
   for (uint8_t trigPin : TRIG_PINS)
-  {
     pinMode(trigPin, OUTPUT);
-  }
 
   for (uint8_t echoPin : ECHO_PINS)
-  {
     pinMode(echoPin, INPUT);
-  }
 }
 
 void loop()
@@ -93,8 +89,9 @@ void loop()
     int timePassedMillis = millis() - globalTimeTracking;
     double avgSpeed = getAverageSpeedKmHour(timePassedMillis);
 
+    lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.printf("%.4f", avgSpeed);
+    lcd.printf("%.4f Km/h", avgSpeed);
 
     firstActivated = false;
     secondActivated = false;
