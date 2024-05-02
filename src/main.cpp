@@ -3,7 +3,6 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <nlohmann/json.hpp>
-#include "dotenv.h"
 
 #include <string>
 #include <iostream>
